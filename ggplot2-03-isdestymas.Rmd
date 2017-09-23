@@ -70,55 +70,71 @@ Užduotys: estetinis išdėstymas
 
 ```{r}
 ggplot(data = mpg) + 
-  geom_point(mapping = aes(x = displ, y = hwy, color = "blue"))
+  geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
 ```
 
 2. Kurie lentelės `mpg` kintamieji yra kategoriniai? Kurie – tolydieji? (Užuomina: `?mpg`). Kaip tai pamatyti atspausdinus `mpg`?
 
 ```{r}
-
+?mpg
+#manufacturer - kategorinis
+#model - kategorinis
+#displ - tolydusis
+#year - tolydusis
+#cyl - tolydusis
 ```
 
 3. Pasirinkite tolydųjį kintamąjį ir atidėkite jo reikšmes šiose skalėse: `color`, `size`, `shape`. 
 
 ```{r}
-
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = cyl, color = class))
+#size = class, shape = class
 ```
 
 4. Kuo šių estetikos elementų (`color`, `size`, `shape`) išdėstymas skiriasi, jei atidedame *kategorinį* vs. *tolydųjį* kintamąjį? 
 
 
 ```{r}
-
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = cyl, shape = class))
 ```
 ```{r}
-
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = model, shape = cty))
 ```
 
 
 5. Ką daro estetikos elementas `stroke`? Su kuriomis formomis jis veikia? (Užuomina: naudokite `geom_point`).
 
 ```{r}
-
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = cyl), stroke = 2)
+#keicia stori
+#reikia naudotis helpu
 ```
 
 
 6. Kas nutinka, jei naudojate kelias skales (pvz., `color`, `size`) su keliais skirtingais kintamaisiais?
 
 ```{r}
-
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = cyl, color = class, size = year))
+#naudoja abu
 ```
 
 7. Kas nutinka, jei to paties kintamojo reikšmes atidedate keliose skirtingose skalėse (tarkime, `color` ir `shape`)?
 
 ```{r}
-
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = cyl, color = class, shape = class))
 ```
 
 8. Kas nutinka, jei su tam tikra skale susiejate ne konkretaus kintamojo pavadinimą (pvz., `aes(colour = displ)`), o kokį nors veiksmą su tuo kintamuoju, tarkime `aes(colour = displ < 5)`?
 
 ```{r}
-
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = cyl, color = as.factor(displ)))
 ```
 
 9. Nubraižykite grafiką ir jame rankiniu būdu parinkite spakvas naudodami:
@@ -127,6 +143,7 @@ ggplot(data = mpg) +
     * spalvų numerius tarp 1 ir 8, be kabučių.
     
 ```{r}
-
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = cyl), color = "blue")
 ```
     

@@ -27,7 +27,7 @@ library(ggplot2)
 ```{r}
 library(tidyverse)
 ```
-
+# :: funkcija uzkrauna neloadinant library?
 Duomenys: automobiliai
 ----------------------------------------------------------------------------- 
 ```{r}
@@ -61,6 +61,29 @@ ggplot(data = mpg) +
 
 Užduotys 1
 ----------------------------------------------------------------------------- 
+```{r}
+ggplot(data = mpg)
+#pilkas staciakampis, truksta sluoksniu
+```
+
+```{r}
+dim(mpg)
+```
+
+```{r}
+?mpg
+```
+
+```{r}
+ggplot(data = mpg) +
+  geom_jitter(mapping = aes(x = hwy, y = cyl))
+```
+
+```{r}
+ggplot(data = mpg) +
+  geom_jitter(mapping = aes(x = class, y = drv))
+#ne to tipo duomenim grafikas
+```
 
 ```{r}
 
