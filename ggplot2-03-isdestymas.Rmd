@@ -97,7 +97,9 @@ ggplot(data = mpg) +
 
 ```{r}
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = cyl, shape = class))
+  geom_point(mapping = aes(x = displ, y = cyl, color = cty))
+#kategorinis - skirtingi elementai
+#tolydusis - elementu gradientas
 ```
 ```{r}
 ggplot(data = mpg) +
@@ -128,13 +130,15 @@ ggplot(data = mpg) +
 ```{r}
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = cyl, color = class, shape = class))
+#naudoja abi skales
 ```
 
 8. Kas nutinka, jei su tam tikra skale susiejate ne konkretaus kintamojo pavadinimą (pvz., `aes(colour = displ)`), o kokį nors veiksmą su tuo kintamuoju, tarkime `aes(colour = displ < 5)`?
 
 ```{r}
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = cyl, color = as.factor(displ)))
+  geom_point(mapping = aes(x = displ, y = cyl, color = displ <5))
+#skale padalinama i 2 logines dalis pagal atlikta veiksma
 ```
 
 9. Nubraižykite grafiką ir jame rankiniu būdu parinkite spakvas naudodami:

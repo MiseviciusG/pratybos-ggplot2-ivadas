@@ -66,6 +66,7 @@ Užduotys: facetės
 
 ```{r}
 t + facet_wrap(~ cty)
+#kiekvienai kintamojo reiksmei sukuriama facete
 ```
 
 2. Ką rodo tušti langeliai įvykdžius funkciją `facet_grid(drv ~ cyl)`? Kaip jie susiję su šiuo grafiku: 
@@ -73,6 +74,7 @@ t + facet_wrap(~ cty)
 ggplot(data = mpg) + 
      geom_point(mapping = aes(x = displ, y = hwy)) +
   facet_grid(drv ~ cyl)
+#elementu atitinkanciu kintamuosius nera ( pvz 5 cilindru ir 4 varomuju ratu masinos mpg nera)
 ```
 
 3. Ką daro žemiau pateiktas kodas? Ką reiškia taškas (`.`)?
@@ -81,20 +83,22 @@ ggplot(data = mpg) +
 ggplot(data = mpg) + 
     geom_point(mapping = aes(x = displ, y = hwy)) + 
     facet_grid(drv ~ .) 
-
+#sukuria grafika kurio facetes padarytos pagal drv kintamaji. "." - dimensijoje nedaroma faceciu
 ```
 
 ```{r}
 ggplot(data = mpg) + 
    geom_point(mapping = aes(x = displ, y = hwy)) + 
-   facet_grid(. ~ cyl) 
+   facet_grid(. ~ model) 
 ```
 
 4. Patyrinėkite antrąją grafiko facetę (kodas žemiau).
     a. Kokie privalumai naudoti facetes vs. išdėstymą spalvomis? 
     b. Kokie trūkumai?
     c. Kaip balansas tarp privalumų ir trūkumų pakistų, jei turėtumėte žymiai daugiau duomenų?
-
+#a. - lengviau suprantami duomenys, nes mazesnis ju persidengimas
+#b. - sunkiau palyginti, nes duomenys skirtingose facetese
+#c. - kol nedaug faceciu, tol jos patogesnes, bet pasidaro sunkiua suprantamos, kai ju daug
 
 
 ```{r}
@@ -106,17 +110,18 @@ ggplot(data = mpg) +
 Spalvomis išdėstykite klasių pavadinimus
 ```{r}
 ggplot(data = mpg) + 
-    geom_point(mapping = aes(x = displ, y = hwy, color =  )) + 
+    geom_point(mapping = aes(x = displ, y = hwy, color =  class)) + 
     facet_wrap(~ class, nrow = 2) 
 ```
 
 
 5. Perskaitykite funkcijos aprašymą: `?facet_wrap`.
-    a. Kokią funkciją atlieka `nrow`? 
-    b. Kokią funkciją atlieka `ncol`? 
-    c. Kurios kitos funkcijos kontroliuoja facečių išdėstymą? 
-    d. Kodėl funkcija `facet_grid()` neturi parametrų `nrow` ir `ncol`?
+    a. Kokią funkciją atlieka `nrow`? #faceciu eiluciu skaicius
+    b. Kokią funkciją atlieka `ncol`? #faceciu stulpeliu skaicius
+    c. Kurios kitos funkcijos kontroliuoja facečių išdėstymą? #as.table, dir
+    d. Kodėl funkcija `facet_grid()` neturi parametrų `nrow` ir `ncol`? #nes sukuria facetes pagal kintamaji ir naudojami to kintamojo stulpeliai/eilutes
 
 
 
 6. Kokiu atveju naudodami `facet_grid()` kintamąjį su didesniu kiekiu skirtingų reikšmių (faktoriaus lygių) turėtumėte atvaizduoti facečių stulpeliuose? Kodėl?
+#
