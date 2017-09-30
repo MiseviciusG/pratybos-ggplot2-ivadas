@@ -125,8 +125,8 @@ Užduotys: koordinačių sistemos
 ```{r}
 ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
   geom_point() + 
-  geom_abline() +
-  coord_fixed()
+  geom_abline() + #prideda referentine linija
+  coord_fixed() #tam, kad kintamuju reiksmes butu vienodu ilgiu, nes abu kintamieji matuojami tokiais paciais vienetais
 ```
 
 
@@ -211,10 +211,84 @@ r2 + labs(fill = "Varomi ratai", color = "Varomi ratai")
 Užduotys: temos elementai
 ----------------------------------------------------------------------------- 
 
-1. Ką daro funkcija `labs()`? Peržiūrėkite dokumentaciją ir išbandykite pavyzdžius.
-2. Ką daro funkcija `theme()`? Peržiūrėkite dokumentaciją ir išbandykite pavyzdžius, kuriuose naudojamas objektas `p1`.
-3. Ką daro funkcija `theme_set()`? Peržiūrėkite dokumentaciją ir išbandykite pavyzdžius.
+1. Ką daro funkcija `labs()`? Peržiūrėkite dokumentaciją ir išbandykite pavyzdžius. #uzdeda antrastes/pavadinimus ant grafiko elementu
+```{r}
+p <- ggplot(mtcars, aes(mpg, wt, colour = cyl)) + geom_point()
+p + labs(colour = "Cylinders")
+p + labs(x = "New x label")
+```
+```{r}
+p + labs(title = "New plot title")
+p + labs(title = "New plot title", subtitle = "A subtitle")
+
+```
+```{r}
+p + labs(caption = "(based on data from ...)")
+```
+
+2. Ką daro funkcija `theme()`? Peržiūrėkite dokumentaciją ir išbandykite pavyzdžius, kuriuose naudojamas objektas `p1`. #pakeicia vizualius grafiko elementus pagal numatytas temas
+```{r}
+p1 <- ggplot(mtcars, aes(wt, mpg)) +
+  geom_point() +
+  labs(title = "Fuel economy declines as weight increases")
+p1
+```
+```{r}
+p1 + theme(plot.title = element_text(size = rel(2)))
+p1 + theme(plot.background = element_rect(fill = "green"))
+```
+```{r}
+
+p1 + theme(panel.background = element_rect(fill = "white", colour = "grey50"))
+p1 + theme(panel.border = element_rect(linetype = "dashed", fill = NA))
+p1 + theme(panel.grid.major = element_line(colour = "black"))
+p1 + theme(
+  panel.grid.major.y = element_blank(),
+  panel.grid.minor.y = element_blank()
+)
+```
+```{r}
+p1 + theme(
+  panel.background = element_rect(fill = NA),
+  panel.grid.major = element_line(colour = "grey50"),
+  panel.ontop = TRUE
+)
+
+```
+```{r}
+p1 + theme(axis.line = element_line(size = 3, colour = "grey80"))
+p1 + theme(axis.text = element_text(colour = "blue"))
+p1 + theme(axis.ticks = element_line(size = 2))
+p1 + theme(axis.ticks.length = unit(.25, "cm"))
+p1 + theme(axis.title.y = element_text(size = rel(1.5), angle = 90))
+
+
+```
+
+3. Ką daro funkcija `theme_set()`? Peržiūrėkite dokumentaciją ir išbandykite pavyzdžius. #automatiskai nustato tema visiems naujai sukurtiems grafikams
+```{r}
+p <- ggplot(mtcars, aes(mpg, wt)) +
+  geom_point()
+p
+```
+```{r}
+old <- theme_set(theme_bw())
+p
+theme_set(old)
+p
+```
+```{r}
+add_el <- theme_grey() +
+  theme(text = element_text(family = "Times"))
+add_el$text
+
+rep_el <- theme_grey() %+replace%
+  theme(text = element_text(family = "Times"))
+rep_el$text
+```
+
 4. Ką atlieka funkcijos `labs()` parametrai `x`, `y`, `title`, `subtitle`, `caption`. Išbandykite kiekvieną atskirai.
+#177-186 projekto eilutes
 
 
 
